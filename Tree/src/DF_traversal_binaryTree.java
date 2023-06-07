@@ -67,6 +67,7 @@ public class DF_traversal_binaryTree {
         if(root.leftchild==null && root.rightchild==null) return 0;
         return 1+ Math.max(height(root.leftchild),height(root.rightchild));
     }
+    //O(log n)
     public int minimum_value(){
         return minimum_value(root);
     }
@@ -76,7 +77,7 @@ public class DF_traversal_binaryTree {
          var right = minimum_value(root.rightchild);
          return Math.min(Math.min(left,right),root.value);
     }
-
+//O(n)
     private int min_binaray_search_tree(){
         if(root==null)
             throw new IllegalStateException();
@@ -87,6 +88,7 @@ public class DF_traversal_binaryTree {
             last =current;
             current=current.leftchild;
         }
+        return last.value;
     }
 
 
