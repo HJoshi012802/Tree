@@ -77,6 +77,19 @@ public class DF_traversal_binaryTree {
          return Math.min(Math.min(left,right),root.value);
     }
 
+    private int min_binaray_search_tree(){
+        if(root==null)
+            throw new IllegalStateException();
+
+        var current =root;
+        var last=current;
+        while(current!=null){
+            last =current;
+            current=current.leftchild;
+        }
+    }
+
+
     public static void main(String[] args) {
       DF_traversal_binaryTree tree=new DF_traversal_binaryTree();
         tree.insert(7);
