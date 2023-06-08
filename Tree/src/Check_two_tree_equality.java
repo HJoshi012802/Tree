@@ -52,6 +52,7 @@ public class Check_two_tree_equality {
        public void traversePreOrder(){
         traversePreOrder(root);
     }
+
        private void traversePreOrder(Node root){
         if(root==null)
             return;
