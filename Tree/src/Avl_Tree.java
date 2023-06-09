@@ -26,27 +26,54 @@ public class Avl_Tree {
         else {
             root.rightchild = insert(root.rightchild, value);
         }
-        root.height=Math.max(
-                height(root.leftchild),
-                height(root.rightchild))+1;
-        //balanceFactor=height(L)-height(R)
-            //>1=>leftheavy
-            //<-1=>rightheavy
+            root.height=Math.max(
+                    height(root.leftchild),
+                    height(root.rightchild))+1;
+        balance(root);
         return root;
         }
+        private void balance(AVLNode root){
+            //balanceFactor=height(L)-height(R)
+            //>1=>leftheavy
+            //<-1=>rightheavy
+            if(isLeaftHeavy(root))
+                if(balanceFactor(root.rightchild)<0){
+                    System.out.println("Left Rotation"+root.leftchild.value);
+                    System.out.println("Right Rotation"+root.value);
+                }
+            else if(isRightHeavy(root)) {
+                if(balanceFactor(root.rightchild)>0){
+                    System.out.println("Right Rotation"+root.rightchild.value);
+                    System.out.println("Left Rotation"+root.value);                }
+            }
+        }
+        private boolean isLeaftHeavy(AVLNode node){
+            return balanceFactor(node)>1;
+        }
+    private boolean isRightHeavy(AVLNode node){
+        return balanceFactor(node)<1;
+    }
+    private int balanceFactor(AVLNode node){
+            return (node==null)?0:height(node.leftchild)-height(root.rightchild);
+    }
         private int height (AVLNode node){
-            if(root==null){
-                return -1;}else {
+            if(node==null){
+                return -1;}
+            else {
                 return node.height;
             }
         }
 
 
         public static void main(String[] args) {
+            //10
+            //  20
+            //    30
          Avl_Tree avl=new Avl_Tree();
          avl.insert(10);
          avl.insert(20);
          avl.insert(30);
+       // int a=avl.height();
         }
     }
 
