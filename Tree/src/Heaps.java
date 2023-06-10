@@ -30,12 +30,17 @@ public class Heaps {
     private int rightchildindex(int index){return index*2+2;}
 
 
-        public void remove(){
+        public int remove(){
         if (isEmpty()){
             throw new IllegalStateException();
         }
+           var root= items[0];
         items[0]=items[size-1];
         size--;
+        bubbleDown();
+ return root;
+    }
+    private void bubbleDown(){
         int index =0;
         while(index <=size&&!isValidParent(index)){
         var largerChildIndex= largerChildindex(index);
@@ -47,11 +52,24 @@ public class Heaps {
     public boolean isEmpty(){
        return size==0;
     }
+
     private int largerChildindex(int index){
+        if(!hasleftchild(index)) return index;
+        if(!hasrightchild(index)) return index;
+
         return (leftchild(index)>rightchild(index)) ?
-                leftchildindex(index):rightchildindex(index);
+                leftchildindex(index):
+                rightchildindex(index);
+    }
+    private boolean hasleftchild(int index){
+        return leftchildindex(index)<=size;
+    }
+    private boolean hasrightchild(int index){
+        return leftchildindex(index)<=size;
     }
     private boolean isValidParent(int index){
+        if(!hasleftchild(index)) return true;
+        if(!hasrightchild(index)) return items[index] >= leftchild(index);
         return items[index] >= leftchild(index)&&
                 items[index] >= rightchild(index);
     }
@@ -63,10 +81,6 @@ public class Heaps {
         return items[rightchildindex(index)];
     }
 
-    private void bubbleDown(){
-
-    }
-
 
     public static void main(String[] args) {
         Heaps heap=new Heaps();
@@ -75,7 +89,8 @@ public class Heaps {
         heap.insert(17);
         heap.insert(4);
         heap.insert(22);
-        System.out.println("Done");
+       int a=  heap.remove();
+        System.out.println(a);
     }
 
 }
